@@ -1,0 +1,110 @@
+//
+//  CoverFlowViewController.swift
+//  drink-order-app
+//
+//  Created by 郭家銘 on 2020/12/14.
+//
+
+import UIKit
+
+private let baseCellID = "baseCellID"
+
+class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    @IBOutlet weak var indicator: UIView!
+    
+    var collectionView: UICollectionView!
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 15
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: baseCellID, for: indexPath) as! BaseCollectionViewCell
+        cell.cellIndex = indexPath.item
+        cell.backgroundColor = .none
+        return cell
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        bringMiddleCellToFront()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUpView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        bringMiddleCellToFront() // 把中间的cell的放在最前面
+    }
+    
+    /// 把中间的cell带到最前面
+    fileprivate func bringMiddleCellToFront() {
+        let pointX = (collectionView.contentOffset.x + collectionView.bounds.width / 2)
+        let point = CGPoint(x: pointX, y: collectionView.bounds.height / 2)
+        let indexPath = collectionView.indexPathForItem(at: point)
+        if let letIndexPath = indexPath {
+            let cell = collectionView.cellForItem(at: letIndexPath)
+            guard let letCell = cell else {
+                return
+            }
+            // 把cell放到最前面
+            collectionView.bringSubviewToFront(letCell)
+        }
+    }
+    
+    private func setUpView() {
+        // 创建flowLayout对象
+        let layout = CoverFlowLayout()
+        
+        let margin: CGFloat = 80
+        let collH: CGFloat = 500
+        let itemH = collH - margin * 2
+        let itemW = (view.bounds.width - margin * 2) / 2
+        
+        layout.itemSize = CGSize(width: itemW + 60, height: itemH - 80);
+        layout.minimumLineSpacing = margin
+        layout.minimumInteritemSpacing = margin
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
+        layout.scrollDirection = .horizontal
+        layout.headerReferenceSize = CGSize(width: itemW-margin, height: view.bounds.height)
+        // 创建collection
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: collH), collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        collectionView.backgroundColor = .red
+        print(collectionView.frame.size.height)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        // 注册cell
+        collectionView.register(BaseCollectionViewCell.self, forCellWithReuseIdentifier: baseCellID)
+        view.addSubview(collectionView)
+        // autoLayout
+        let collectionViewBottom = NSLayoutConstraint(item: collectionView!, attribute: .top, relatedBy: .equal, toItem: indicator, attribute: .bottom, multiplier: 1, constant: 0)
+        let collectionViewWidth = NSLayoutConstraint(item: collectionView!, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: view.bounds.width)
+        let collectionViewHeight = NSLayoutConstraint(item: collectionView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: collH)
+        NSLayoutConstraint.activate([ collectionViewBottom, collectionViewWidth, collectionViewHeight ])
+    }
+}
+
+//extension CoverFlowViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 15
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: baseCellID, for: indexPath) as! BaseCollectionViewCell
+//        cell.cellIndex = indexPath.item
+//        cell.backgroundColor = .none
+//        return cell
+//    }
+//}
+//
+//extension CoverFlowViewController: UICollectionViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        bringMiddleCellToFront()
+//    }
+//}

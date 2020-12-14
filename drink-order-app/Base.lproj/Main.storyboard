@@ -1,24 +1,138 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="drink_order_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G6m-Wc-WS6">
+                                <rect key="frame" x="32" y="64" width="48" height="48"/>
+                                <color key="backgroundColor" name="DeepBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="OCz-jr-Bnw"/>
+                                    <constraint firstAttribute="width" constant="48" id="l8G-EP-0ct"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="arrow.backward" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, 彼得潘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5E-5d-1ac">
+                                <rect key="frame" x="32" y="133" width="350" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                <color key="textColor" name="DeepBlueColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天我想來點..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QIw-Ps-wLl">
+                                <rect key="frame" x="32" y="183" width="121" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" name="DeepBlueColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIt-jE-bsw">
+                                <rect key="frame" x="32" y="231" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="2Eg-ng-aiO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="所有飲料">
+                                    <color key="titleColor" name="DeepBlueColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8h-Hp-Bi2">
+                                <rect key="frame" x="126" y="231" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="XJ8-g4-WnA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="人氣精選">
+                                    <color key="titleColor" name="DeepBlueColor"/>
+                                </state>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8e-0k-kha">
+                                <rect key="frame" x="32" y="255" width="70" height="3"/>
+                                <color key="backgroundColor" name="DeepBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="SUS-gu-wvP"/>
+                                    <constraint firstAttribute="width" constant="70" id="bxr-v4-aCo"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oiu-so-JsF">
+                                <rect key="frame" x="0.0" y="800" width="414" height="96"/>
+                                <color key="backgroundColor" name="DeepBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="96" id="THU-2e-vse"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IIs-TD-2Kt">
+                                <rect key="frame" x="220" y="231" width="87" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="aH1-To-kuN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="寶可夢飲品">
+                                    <color key="titleColor" name="DeepBlueColor"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" name="LightYellowColor"/>
+                        <constraints>
+                            <constraint firstItem="a8e-0k-kha" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="2Mc-mA-uva"/>
+                            <constraint firstItem="IIs-TD-2Kt" firstAttribute="leading" secondItem="c8h-Hp-Bi2" secondAttribute="trailing" constant="24" id="4yP-Qp-F6h"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="h5E-5d-1ac" secondAttribute="trailing" constant="32" id="9zQ-a5-96n"/>
+                            <constraint firstItem="nIt-jE-bsw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="DLj-Si-8Jj"/>
+                            <constraint firstItem="G6m-Wc-WS6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="Dsz-vw-W0H"/>
+                            <constraint firstItem="nIt-jE-bsw" firstAttribute="top" secondItem="QIw-Ps-wLl" secondAttribute="bottom" constant="27" id="FlU-jb-dg5"/>
+                            <constraint firstItem="QIw-Ps-wLl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="K8f-36-fna"/>
+                            <constraint firstItem="a8e-0k-kha" firstAttribute="top" secondItem="nIt-jE-bsw" secondAttribute="bottom" constant="4" id="OZi-Us-3nZ"/>
+                            <constraint firstAttribute="bottom" secondItem="Oiu-so-JsF" secondAttribute="bottom" id="WnR-J7-g50"/>
+                            <constraint firstItem="G6m-Wc-WS6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="ZmO-Qp-Y7r"/>
+                            <constraint firstItem="IIs-TD-2Kt" firstAttribute="top" secondItem="QIw-Ps-wLl" secondAttribute="bottom" constant="27" id="aFN-e2-cp0"/>
+                            <constraint firstItem="Oiu-so-JsF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="dAw-2v-ohL"/>
+                            <constraint firstItem="c8h-Hp-Bi2" firstAttribute="leading" secondItem="nIt-jE-bsw" secondAttribute="trailing" constant="24" id="k6F-nK-1wF"/>
+                            <constraint firstItem="c8h-Hp-Bi2" firstAttribute="top" secondItem="QIw-Ps-wLl" secondAttribute="bottom" constant="27" id="raV-69-amG"/>
+                            <constraint firstItem="h5E-5d-1ac" firstAttribute="top" secondItem="G6m-Wc-WS6" secondAttribute="bottom" constant="21" id="tMh-Rv-ZtJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Oiu-so-JsF" secondAttribute="trailing" id="uIG-O7-BDE"/>
+                            <constraint firstItem="h5E-5d-1ac" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="upb-kR-hhh"/>
+                            <constraint firstItem="QIw-Ps-wLl" firstAttribute="top" secondItem="h5E-5d-1ac" secondAttribute="bottom" constant="9" id="urm-YO-bZg"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="indicator" destination="a8e-0k-kha" id="sGv-mH-vcV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="121.73913043478262" y="113.83928571428571"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
+        <namedColor name="DeepBlueColor">
+            <color red="0.0" green="0.23529411764705882" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="LightYellowColor">
+            <color red="1" green="0.792156862745098" blue="0.49411764705882355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
