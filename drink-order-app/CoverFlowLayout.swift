@@ -18,7 +18,7 @@ class CoverFlowLayout: UICollectionViewFlowLayout {
         // 每个点根据距离中心点距离进行缩放
         attributes!.forEach({ (attr) in
             let pad = abs(centerX - attr.center.x)
-            let scale = 1.8 - pad / collectionView!.bounds.width
+            let scale = 1.2 - pad / collectionView!.bounds.width
             attr.transform = CGAffineTransform(scaleX: scale, y: scale)
         })
         return attributes
@@ -54,7 +54,7 @@ class CoverFlowLayout: UICollectionViewFlowLayout {
         }
         
         // adjust
-        targetPoint.x -= 60
+        targetPoint.x -= 153.5/2
         
         return targetPoint
     }

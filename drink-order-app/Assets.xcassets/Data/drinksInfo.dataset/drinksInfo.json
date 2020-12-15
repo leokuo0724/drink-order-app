@@ -1,0 +1,62 @@
+[
+  {
+    "name_zh": "熟成紅茶",
+    "name_en": "Signature Black Tea",
+    "description": "解炸物/燒烤肉類油膩，茶味濃郁帶果香",
+    "imageUrl": null,
+    "sizeInfo": {
+      "medium": {
+        "price": 25,
+        "maxCalorie": 180
+      },
+      "large": {
+        "price": 30,
+        "maxCalorie": 200
+      }
+    },
+    "others": {
+      "isCanAddWhiteBubble": true,
+      "isCanAddBlackBubble": true
+    }
+  },
+  {
+    "name_zh": "麗春紅茶",
+    "name_en": "Li-Chun Black Tea",
+    "description": "去除海鮮羶腥，茶味較淡帶花香",
+    "imageUrl": null,
+    "sizeInfo": {
+      "medium": {
+        "price": 25,
+        "maxCalorie": 180
+      },
+      "large": {
+        "price": 30,
+        "maxCalorie": 200
+      }
+    },
+    "others": {
+      "isCanAddWhiteBubble": true,
+      "isCanAddBlackBubble": true
+    }
+  },
+  {
+    "name_zh": "太妃紅茶",
+    "name_en": "Toffee Black Tea",
+    "description": "咖啡與茶的神秘比例搭配",
+    "imageUrl": null,
+    "sizeInfo": {
+      "medium": {
+        "price": 30,
+        "maxCalorie": 160
+      },
+      "large": {
+        "price": 35,
+        "maxCalorie": 180
+      }
+    },
+    "others": {
+      "isCanAddWhiteBubble": true,
+      "isCanAddBlackBubble": true
+    }
+  }
+]
