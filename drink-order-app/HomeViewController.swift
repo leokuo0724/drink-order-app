@@ -21,6 +21,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         setUpView()
         fetchItem()
+        
+        // Notification
+        NotificationCenter.default.addObserver(self, selector: #selector(toDrinkDetail), name: NSNotification.Name("toDrinkDetail"), object: nil)
     }
     
     // Delegate
@@ -55,7 +58,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                             self.collectionView.reloadData()
                         }
                     } catch {
-                        print("ERROR!")
                         print(error)
                     }
                 }
@@ -93,7 +95,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let itemW = ((view.bounds.width - margin * 2) / 2)
         
         layout.itemSize = CGSize(width: (itemW + 60)*1.5, height: (itemH - 80)*1.5)
-        print(layout.itemSize.width - itemW)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
@@ -103,7 +104,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.backgroundColor = .none
-        print(collectionView.frame.size.height)
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -116,5 +116,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         let collectionViewHeight = NSLayoutConstraint(item: collectionView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0, constant: collH)
         NSLayoutConstraint.activate([ collectionViewBottom, collectionViewWidth, collectionViewHeight ])
     }
+    
+    // 到飲料詳細頁面
+    @objc func toDrinkDetail() {
+        if let controller = storyboard?.instantiateViewController(identifier: "DrinkDetailViewController") as? DrinkDetailViewController {
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
 }
 

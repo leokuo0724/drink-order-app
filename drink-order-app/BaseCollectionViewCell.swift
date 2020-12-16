@@ -21,8 +21,6 @@ class BaseCollectionViewCell: UICollectionViewCell {
     var selectBtn = UIButton()
     
     override init(frame: CGRect) {
-        print("init")
-        print()
         super.init(frame: frame)
         self.backgroundColor = .none
         
@@ -40,7 +38,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
         nameZHLabel.font = UIFont.boldSystemFont(ofSize: 28)
         innerView.addSubview(nameZHLabel)
         
-        nameENLabel.frame = CGRect(x: 24, y: 56, width: innerView.frame.size.width-48, height: 18)
+        nameENLabel.frame = CGRect(x: 24, y: 58, width: innerView.frame.size.width-48, height: 18)
         nameENLabel.textColor = UIColor(named: "DeepBlueColor")
         nameENLabel.text = "Signature Black Tea"
         nameENLabel.font = UIFont.systemFont(ofSize: 15)
@@ -74,6 +72,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
         
         selectBtn.frame = CGRect(x: 156, y: 340, width: 68, height: 30)
         selectBtn.backgroundColor = UIColor(named: "LightYellowColor")
+        selectBtn.isEnabled = true
         selectBtn.setTitle("我要這個", for: .normal)
         selectBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 12)
         selectBtn.titleLabel?.textColor = .white
@@ -88,6 +87,17 @@ class BaseCollectionViewCell: UICollectionViewCell {
             nameENLabel.text = drinkInfo.name_en.value
             descriptionLabel.text = drinkInfo.description.value
             priceLabel.text = "$\(drinkInfo.priceM.value)"
+            
+            if let urlStr = URL(string: drinkInfo.imageUrl.value) {
+                URLSession.shared.dataTask(with: urlStr) { (data, response, error) in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            self.imageView.image = UIImage(data: data)
+                        }
+                    }
+                }.resume()
+            }
+            
         }
     }
     
@@ -97,9 +107,10 @@ class BaseCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func selectDrink() {
-        if let drinkInfo = drinkInfo {
-            print(drinkInfo)
-        }
+//        if let drinkInfo = drinkInfo {
+//
+//        }
+        NotificationCenter.default.post(name: NSNotification.Name("toDrinkDetail"), object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
