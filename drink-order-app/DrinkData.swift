@@ -15,7 +15,6 @@ struct Feed: Codable {
     let entry: Array<DrinkData>
 }
 
-
 struct DrinkData: Codable {
     let name_zh: StringType
     let name_en: StringType

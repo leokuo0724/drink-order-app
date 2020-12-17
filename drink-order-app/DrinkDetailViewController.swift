@@ -30,6 +30,10 @@ enum Size: String, CaseIterable {
     case Medium = "中杯 Medium"
     case Large = "大杯 Large"
 }
+enum AddOn: String, CaseIterable {
+    case whiteBubble = "白玉珍珠 White Tapioca"
+    case blackBubble = "墨玉珍珠 Tapioca"
+}
 
 class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -39,7 +43,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var drinkImageView: UIImageView!
     
     @IBOutlet weak var calorieMLabel: UILabel!
-    @IBOutlet weak var calorieLlabel: UILabel!
+    @IBOutlet weak var calorieLLabel: UILabel!
     
     @IBOutlet weak var temperatureView: UIView!
     @IBOutlet weak var temperatureTableView: UITableView!
@@ -49,6 +53,8 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var sizeTableView: UITableView!
     @IBOutlet weak var addOnView: UIView!
     @IBOutlet weak var saySomethingView: UIView!
+    
+    @IBOutlet weak var priceLabel: UILabel!
     
     var currentOption: OptionType? = nil
 //    private let bottomY: CGFloat = 740
@@ -75,17 +81,39 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         ],
     ]
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // set table view height
+        // 設定 table view 大小
         temperatureTableView.frame.size.height = CGFloat(48*Temp.allCases.count)
         sugarTableView.frame.size.height = CGFloat(48*Sugar.allCases.count)
         sizeTableView.frame.size.height = CGFloat(48*Size.allCases.count)
         
-        // set optionExpand
+        // 設定選項縮小
         optionExpand()
+        
+        // 設定飲料資訊
+        setBasicInfo()
+        
+        // 設定 NotificationCenter
+        NotificationCenter.default.addObserver(self, selector: #selector(clearTempCellStyle), name: NSNotification.Name("clearTempCellStyle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(clearSugarCellStyle), name: NSNotification.Name("clearSugarCellStyle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(clearSizeCellStyle), name: NSNotification.Name("clearSizeCellStyle"), object: nil)
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        order.reset()
+    }
+    
+    func setBasicInfo() {
+        nameZHLabel.text = selectedDrink?.name_zh.value
+        nameENLabel.text = selectedDrink?.name_en.value
+        descriptionLabel.text = selectedDrink?.description.value
+        calorieMLabel.text = selectedDrink?.maxCalorieM.value
+        calorieLLabel.text = selectedDrink?.maxCalorieL.value
+        // 圖片
+        drinkImageView.image = allDrinkImages[(selectedDrink?.name_zh.value)!]
+        // 價錢
+        priceLabel.text = "$\((selectedDrink?.priceM.value)!).00"
     }
     
     func optionExpand() {
@@ -172,6 +200,23 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             break
         }
         return cell
+    }
+    
+    // 清除 cells 樣式
+    @objc func clearTempCellStyle() {
+        temperatureTableView.visibleCells.forEach({
+            ($0 as? OptionSelectCell)?.setBtnStyle(isActive: false)
+        })
+    }
+    @objc func clearSugarCellStyle() {
+        sugarTableView.visibleCells.forEach({
+            ($0 as? OptionSelectCell)?.setBtnStyle(isActive: false)
+        })
+    }
+    @objc func clearSizeCellStyle() {
+        sizeTableView.visibleCells.forEach({
+            ($0 as? OptionSelectCell)?.setBtnStyle(isActive: false)
+        })
     }
     
     

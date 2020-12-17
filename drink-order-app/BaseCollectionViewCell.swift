@@ -55,6 +55,7 @@ class BaseCollectionViewCell: UICollectionViewCell {
         innerView.addSubview(descriptionLabel)
         
         imageView.frame = CGRect(x: 24, y: 132, width: innerView.frame.size.width-48, height: innerView.frame.size.width-48)
+        // 預設圖片
         imageView.image = UIImage(named: "熟成紅茶")
         innerView.addSubview(imageView)
         
@@ -92,7 +93,9 @@ class BaseCollectionViewCell: UICollectionViewCell {
                 URLSession.shared.dataTask(with: urlStr) { (data, response, error) in
                     if let data = data {
                         DispatchQueue.main.async {
+                            // 得到圖片
                             self.imageView.image = UIImage(data: data)
+                            allDrinkImages[drinkInfo.name_zh.value] = UIImage(data: data)
                         }
                     }
                 }.resume()
@@ -106,10 +109,12 @@ class BaseCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
     }
     
+    // 選擇該飲料按鈕
     @objc func selectDrink() {
-//        if let drinkInfo = drinkInfo {
-//
-//        }
+        if let drinkInfo = drinkInfo {
+            selectedDrink = drinkInfo
+            order.drinkName = selectedDrink?.name_zh.value
+        }
         NotificationCenter.default.post(name: NSNotification.Name("toDrinkDetail"), object: nil)
     }
     

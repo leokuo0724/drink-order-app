@@ -10,6 +10,9 @@ import UIKit
 private let baseCellID = "baseCellID"
 
 var allDrinks: Array<DrinkData> = []
+var allDrinkImages: [String : UIImage] = [:]
+var selectedDrink: DrinkData?
+let order = Order(drinkName: nil, drinkTemp: nil, drinkSugar: nil, drinkSize: nil, saySomething: nil, totalPrice: nil)
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
