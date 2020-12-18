@@ -64,15 +64,15 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         temperatureTableView.frame.size.height = CGFloat(48*Temp.allCases.count)
         sugarTableView.frame.size.height = CGFloat(48*Sugar.allCases.count)
         sizeTableView.frame.size.height = CGFloat(48*Size.allCases.count)
-        // 設定 brief text
-        briefLabel.text = "請選擇飲品溫度、甜度、份量"
-        // 設定 btn disabled
+        // 設定 btn style and disabled
+        orderBtn.layer.cornerRadius = 6
+        orderBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         setOrderBtnEnabled(false)
         
         // 設定選項縮小
         optionExpand()
-        // 設定訂購資訊
-        updateBrief()
+        // 設定初始資訊
+        setBasicInfo()
         
         // 設定 NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(clearTempCellStyle), name: NSNotification.Name("clearTempCellStyle"), object: nil)
@@ -94,6 +94,8 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         drinkImageView.image = allDrinkImages[(selectedDrink?.name_zh.value)!]
         // 價錢
         priceLabel.text = "$\((selectedDrink?.priceM.value)!).00"
+        // brief
+        briefLabel.text = "請選擇飲品溫度、甜度、份量"
     }
     
     func optionExpand() {
