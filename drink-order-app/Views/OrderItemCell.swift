@@ -9,15 +9,24 @@ import UIKit
 
 class OrderItemCell: UITableViewCell {
 
+    @IBOutlet weak var drinkImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var briefLabel: UILabel!
+    @IBOutlet weak var ordererLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.selectionStyle = .none
+        self.backgroundColor = .clear
+        
+        nameLabel.textColor = .white
+        briefLabel.textColor = .white
+        briefLabel.alpha = 0.5
+        ordererLabel.textColor = .white
+        ordererLabel.alpha = 0.5
+        priceLabel.textColor = .white
     }
 
 }

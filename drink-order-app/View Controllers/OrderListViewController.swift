@@ -10,12 +10,17 @@ import UIKit
 class OrderListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var targetList: [[String: String]] = []
+    
+    @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var orderListTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        groupLabel.text = userInfo.userGroup
+        orderListTableView.backgroundColor = .clear
+        orderListTableView.separatorColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.5)
+        orderListTableView.separatorInset = UIEdgeInsets(top: 0, left: 92, bottom: 0, right: 0)
         fetchOrderItems()
     }
     
@@ -25,6 +30,17 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderItemCell", for: indexPath) as! OrderItemCell
+        // 設定畫面
+        let drinkInfo = targetList[indexPath.row]
+        // 若無該飲料圖片，給預設圖片
+        if let image = allDrinkImages[drinkInfo["drinkName"]!] {
+            cell.drinkImageView.image = image
+        } else {
+            cell.drinkImageView.image = UIImage(named: "熟成紅茶")
+        }
+        cell.nameLabel.text = drinkInfo["drinkName"]!
+        cell.briefLabel.text = "\(drinkInfo["drinkSize"]!)、\(drinkInfo["drinkTemp"]!)、\(drinkInfo["drinkSugar"]!) \(drinkInfo["addOn"]!)"
+        cell.priceLabel.text = "$\(drinkInfo["totalPrice"]!)"
         return cell
     }
 
