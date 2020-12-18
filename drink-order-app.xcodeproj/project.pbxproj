@@ -23,7 +23,7 @@
 		EB664F22258A36F2002BBDC8 /* OptionSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */; };
 		EB85DB5D258C54B700730003 /* SaySometingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB5C258C54B700730003 /* SaySometingTextView.swift */; };
 		EB85DB61258C8E4300730003 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB60258C8E4300730003 /* OrderListViewController.swift */; };
-		EB85DB64258C8F1C00730003 /* OrderListStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB63258C8F1C00730003 /* OrderListStruct.swift */; };
+		EB85DB64258C8F1C00730003 /* PostOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB63258C8F1C00730003 /* PostOrder.swift */; };
 		EB85DB67258C92E900730003 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB66258C92E900730003 /* UserInfo.swift */; };
 		EB85DB6C258C9B8800730003 /* OrderItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB6B258C9B8800730003 /* OrderItemCell.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +47,7 @@
 		EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectCell.swift; sourceTree = "<group>"; };
 		EB85DB5C258C54B700730003 /* SaySometingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaySometingTextView.swift; sourceTree = "<group>"; };
 		EB85DB60258C8E4300730003 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
-		EB85DB63258C8F1C00730003 /* OrderListStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListStruct.swift; sourceTree = "<group>"; };
+		EB85DB63258C8F1C00730003 /* PostOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOrder.swift; sourceTree = "<group>"; };
 		EB85DB66258C92E900730003 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		EB85DB6B258C9B8800730003 /* OrderItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +103,7 @@
 				EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */,
 				EB24223E258BB62A001F6F28 /* Order.swift */,
 				EB242246258C45A1001F6F28 /* Enums.swift */,
-				EB85DB63258C8F1C00730003 /* OrderListStruct.swift */,
+				EB85DB63258C8F1C00730003 /* PostOrder.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 				EB139E102587589E003F05A8 /* SceneDelegate.swift in Sources */,
 				EB24224B258C465D001F6F28 /* OptionCheckCell.swift in Sources */,
 				EB85DB67258C92E900730003 /* UserInfo.swift in Sources */,
-				EB85DB64258C8F1C00730003 /* OrderListStruct.swift in Sources */,
+				EB85DB64258C8F1C00730003 /* PostOrder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

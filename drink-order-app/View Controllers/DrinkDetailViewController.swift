@@ -258,11 +258,13 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         
         briefLabel.text = outputStr
         priceLabel.text = "$\(totalPrice).00"
+        order.totalPrice = totalPrice
         setOrderBtnEnabled(isCanOrder)
     }
     
     func setOrderBtnEnabled(_ isEnabled: Bool) {
         if isEnabled {
+            print("set enabled")
             orderBtn.isEnabled = true
             orderBtn.backgroundColor = UIColor(named: "LightYellowColor")
         } else {
@@ -310,5 +312,79 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         optionExpand()
     }
     
+    @IBAction func orderAction(_ sender: Any) {
+        print("check")
+        let controller = UIAlertController(title: "是否加入訂購？", message: "確認後訂購資料將上傳", preferredStyle: .alert)
+        
+        // 取消
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        controller.addAction(cancelAction)
+        
+        // 確認
+        let okAction = UIAlertAction(title: "確認", style: .default) { (_) in
+            // 上傳 database
+            self.postOrder()
+        }
+        controller.addAction(okAction)
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func postOrder() {
+        // 開始 loading anim
+        
+        // 設定資料格式
+        let orderItem = OrderItem(group: userInfo.userGroup,
+                                  orderer: userInfo.userName,
+                                  drinkName: order.drinkName!,
+                                  drinkSize: (order.drinkSize?.rawValue.components(separatedBy: " ")[0])!,
+                                  drinkTemp: (order.drinkTemp?.rawValue.components(separatedBy: " ")[0])!,
+                                  drinkSugar: (order.drinkSugar?.rawValue.components(separatedBy: " ")[0])!,
+                                  addOn: formatAddOns(),
+                                  saySomething: formatSaySomething(),
+                                  totalPrice: String(order.totalPrice!),
+                                  editCode: userInfo.editCode,
+                                  lastUpdateTime: formatDate())
+        let postOrder = PostOrder(data: orderItem)
+        
+        let url = URL(string: "https://sheetdb.io/api/v1/wbsoh89yl2tip")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("appliction/json", forHTTPHeaderField: "Content-Type")
 
+        if let data = try? JSONEncoder().encode(postOrder) {
+            // 資料裝在 httpBody 中
+            urlRequest.httpBody = data
+            URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+                if let data = data,
+                   let status = try? JSONDecoder().decode([String:Int].self, from: data),
+                   status["created"] == 1 {
+                    print("ok")
+                    // 停止 loading anim
+                } else {
+                    print("error")
+                }
+            }.resume()
+        }
+    }
+    func formatSaySomething() -> String {
+        if order.saySomething == "想說點什麼呢..." {
+            return ""
+        } else {
+            return order.saySomething!
+        }
+    }
+    func formatAddOns() -> String {
+        var output: String = ""
+        for ingredient in order.addOn {
+            let str = ingredient.rawValue.components(separatedBy: " ")[0].prefix(2)
+            output += "加\(str) "
+        }
+        return output
+    }
+    func formatDate() -> String {
+        let dateFormatter = ISO8601DateFormatter()
+        return dateFormatter.string(from: Date())
+    }
+    
 }

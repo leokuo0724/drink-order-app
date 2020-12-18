@@ -14,11 +14,12 @@ var userInfo = UserInfo(userName: "彼得潘", userGroup: "17 彼得潘班", edi
 var allDrinks: Array<DrinkData> = []
 var allDrinkImages: [String : UIImage] = [:]
 var selectedDrink: DrinkData?
-let order = Order(drinkName: nil, drinkTemp: nil, drinkSugar: nil, drinkSize: nil, saySomething: nil, totalPrice: nil)
+var order = Order(drinkName: nil, drinkTemp: nil, drinkSugar: nil, drinkSize: nil, saySomething: nil, totalPrice: nil)
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     
     @IBOutlet weak var indicator: UIView!
+    @IBOutlet weak var orderListBtn: UIButton!
     
     var collectionView: UICollectionView!
     
@@ -26,6 +27,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         setUpView()
         fetchItem()
+        // order list btn
+        orderListBtn.layer.cornerRadius = 6
+        orderListBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(toDrinkDetail), name: NSNotification.Name("toDrinkDetail"), object: nil)

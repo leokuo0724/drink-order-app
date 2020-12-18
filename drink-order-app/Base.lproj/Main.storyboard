@@ -292,8 +292,13 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" name="LightYellowColor"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" title="加入訂購" image="cart" catalog="system"/>
+                                        <color key="tintColor" name="DeepBlueColor"/>
+                                        <state key="normal" title="加入訂購" image="cart" catalog="system">
+                                            <color key="titleColor" name="DeepBlueColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="orderAction:" destination="Vfm-eR-0e2" eventType="touchUpInside" id="XhE-g8-yyc"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="正常冰、無糖、大杯、加白玉" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rLJ-1Y-jrF">
                                         <rect key="frame" x="36" y="53" width="212" height="15"/>
@@ -366,14 +371,14 @@
                                 <rect key="frame" x="0.0" y="740" width="414" height="156"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="共計 4杯" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XC-7c-mSn">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="共計 0杯" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XC-7c-mSn">
                                         <rect key="frame" x="156" y="18" width="236" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" name="DeepBlueColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$120" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlN-cJ-ZsA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlN-cJ-ZsA">
                                         <rect key="frame" x="156" y="27" width="236" height="41"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
@@ -465,6 +470,8 @@
                     <connections>
                         <outlet property="groupLabel" destination="lS8-3Z-GzV" id="hel-4G-urp"/>
                         <outlet property="orderListTableView" destination="brW-mt-d35" id="lLv-3L-eQr"/>
+                        <outlet property="priceLabel" destination="BlN-cJ-ZsA" id="r36-zQ-x5s"/>
+                        <outlet property="totalAmountLabel" destination="6XC-7c-mSn" id="dgR-eT-ckF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mUA-xa-Jpv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -537,14 +544,32 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oiu-so-JsF">
                                 <rect key="frame" x="0.0" y="800" width="414" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmK-WO-GSU">
-                                        <rect key="frame" x="325" y="33" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gmK-WO-GSU">
+                                        <rect key="frame" x="254" y="19" width="124" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" name="DeepBlueColor"/>
+                                        <state key="normal" title="訂購清單" image="doc.plaintext.fill" catalog="system">
+                                            <color key="titleColor" name="DeepBlueColor"/>
+                                        </state>
                                         <connections>
                                             <action selector="toOrderList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lqr-Hv-MGS"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="彼得潘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CVs-mx-kjS">
+                                        <rect key="frame" x="36" y="21" width="52" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="17 彼得潘班" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QP-OE-eDH">
+                                        <rect key="frame" x="36" y="46" width="65" height="15"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="DeepBlueColor"/>
                                 <constraints>
@@ -592,6 +617,7 @@
                     </view>
                     <connections>
                         <outlet property="indicator" destination="a8e-0k-kha" id="sGv-mH-vcV"/>
+                        <outlet property="orderListBtn" destination="gmK-WO-GSU" id="3Qx-bZ-Xqf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -602,6 +628,7 @@
     <resources>
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="cart" catalog="system" width="128" height="102"/>
+        <image name="doc.plaintext.fill" catalog="system" width="115" height="128"/>
         <image name="熟成紅茶" width="500" height="500"/>
         <namedColor name="DeepBlueColor">
             <color red="0.0" green="0.23499999940395355" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

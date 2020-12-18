@@ -13,6 +13,8 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var orderListTableView: UITableView!
+    @IBOutlet weak var totalAmountLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +63,22 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
                     // 更新畫面
                     DispatchQueue.main.async {
                         self.orderListTableView.reloadData()
+                        self.totalAmountLabel.text = "共計 \(self.targetList.count)杯"
+                        self.priceLabel.text = "$\(self.computeTotal())"
                     }
                 } catch {
                     print(error)
                 }
             }
         }.resume()
+    }
+    
+    func computeTotal() -> Int {
+        var result: Int = 0
+        targetList.forEach({
+            result += Int($0["totalPrice"]!) ?? 0
+        })
+        return result
     }
 
 }
