@@ -264,7 +264,6 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     
     func setOrderBtnEnabled(_ isEnabled: Bool) {
         if isEnabled {
-            print("set enabled")
             orderBtn.isEnabled = true
             orderBtn.backgroundColor = UIColor(named: "LightYellowColor")
         } else {
@@ -313,11 +312,14 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func orderAction(_ sender: Any) {
-        print("check")
+        // 訂購按鈕鎖定
+        setOrderBtnEnabled(false)
         let controller = UIAlertController(title: "是否加入訂購？", message: "確認後訂購資料將上傳", preferredStyle: .alert)
         
         // 取消
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel) { (_) in
+            self.setOrderBtnEnabled(true)
+        }
         controller.addAction(cancelAction)
         
         // 確認
@@ -326,7 +328,6 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             self.postOrder()
         }
         controller.addAction(okAction)
-        
         present(controller, animated: true, completion: nil)
     }
     
@@ -360,9 +361,16 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
                    let status = try? JSONDecoder().decode([String:Int].self, from: data),
                    status["created"] == 1 {
                     print("ok")
-                    // 停止 loading anim
+                    DispatchQueue.main.async {
+                        self.setOrderBtnEnabled(true)
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    
                 } else {
                     print("error")
+                    DispatchQueue.main.async {
+                        self.setOrderBtnEnabled(true)
+                    }
                 }
             }.resume()
         }
@@ -371,7 +379,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         if order.saySomething == "想說點什麼呢..." {
             return ""
         } else {
-            return order.saySomething!
+            return order.saySomething
         }
     }
     func formatAddOns() -> String {

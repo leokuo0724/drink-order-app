@@ -14,7 +14,7 @@ var userInfo = UserInfo(userName: "彼得潘", userGroup: "17 彼得潘班", edi
 var allDrinks: Array<DrinkData> = []
 var allDrinkImages: [String : UIImage] = [:]
 var selectedDrink: DrinkData?
-var order = Order(drinkName: nil, drinkTemp: nil, drinkSugar: nil, drinkSize: nil, saySomething: nil, totalPrice: nil)
+var order = Order(drinkName: nil, drinkTemp: nil, drinkSugar: nil, drinkSize: nil, totalPrice: nil)
 
 class HomeViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     

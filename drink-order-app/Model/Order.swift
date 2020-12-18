@@ -13,20 +13,18 @@ class Order {
     var drinkSugar: Sugar?
     var drinkSize: Size?
     var addOn: Array<AddOn> = []
-    var saySomething: String?
+    var saySomething: String = "想說點什麼呢..."
     var totalPrice: Int?
     
     init(drinkName: String?,
          drinkTemp: Temp?,
          drinkSugar: Sugar?,
          drinkSize: Size?,
-         saySomething: String?,
          totalPrice: Int?) {
         self.drinkName = drinkName
         self.drinkTemp = drinkTemp
         self.drinkSugar = drinkSugar
         self.drinkSize = drinkSize
-        self.saySomething = saySomething
         self.totalPrice = totalPrice
     }
     
@@ -36,7 +34,7 @@ class Order {
         drinkSugar = nil
         drinkSize = nil
         addOn = []
-        saySomething = nil
+        saySomething = "想說點什麼呢..."
         totalPrice = nil
     }
 }
