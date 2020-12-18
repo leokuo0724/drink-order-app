@@ -7,34 +7,6 @@
 
 import UIKit
 
-enum OptionType {
-    case temp, sugar, size, addOn, saySomething
-}
-enum Temp: String, CaseIterable {
-    case regularIce = "正常冰 Regular Ice"
-    case lessIce = "少冰 Less Ice"
-    case halfIce = "微冰 Half Ice"
-    case noIce = "去冰 Ice-Free"
-    case roomTemp = "常溫 Room Temperature"
-    case warmTemp = "溫 Warm"
-    case hot = "熱 Hot"
-}
-enum Sugar: String, CaseIterable {
-    case regularSugar = "全糖 100% Sugar"
-    case lessSugar = "少糖 70% Sugar"
-    case halfSugar = "半糖 50% Sugar"
-    case lightSugar = "微糖 30% Sugar"
-    case noSugar = "無糖 Sugar-Free"
-}
-enum Size: String, CaseIterable {
-    case Medium = "中杯 Medium"
-    case Large = "大杯 Large"
-}
-enum AddOn: String, CaseIterable {
-    case whiteBubble = "白玉珍珠 White Tapioca"
-    case blackBubble = "墨玉珍珠 Tapioca"
-}
-
 class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var nameZHLabel: UILabel!
@@ -52,9 +24,13 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var sizeView: UIView!
     @IBOutlet weak var sizeTableView: UITableView!
     @IBOutlet weak var addOnView: UIView!
+    @IBOutlet weak var addOnTableView: UITableView!
     @IBOutlet weak var saySomethingView: UIView!
+    @IBOutlet weak var saySomethingTextView: UITextView!
     
     @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var briefLabel: UILabel!
+    @IBOutlet weak var orderBtn: UIButton!
     
     var currentOption: OptionType? = nil
 //    private let bottomY: CGFloat = 740
@@ -88,17 +64,21 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         temperatureTableView.frame.size.height = CGFloat(48*Temp.allCases.count)
         sugarTableView.frame.size.height = CGFloat(48*Sugar.allCases.count)
         sizeTableView.frame.size.height = CGFloat(48*Size.allCases.count)
+        // 設定 brief text
+        briefLabel.text = "請選擇飲品溫度、甜度、份量"
+        // 設定 btn disabled
+        setOrderBtnEnabled(false)
         
         // 設定選項縮小
         optionExpand()
-        
-        // 設定飲料資訊
-        setBasicInfo()
+        // 設定訂購資訊
+        updateBrief()
         
         // 設定 NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(clearTempCellStyle), name: NSNotification.Name("clearTempCellStyle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSugarCellStyle), name: NSNotification.Name("clearSugarCellStyle"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(clearSizeCellStyle), name: NSNotification.Name("clearSizeCellStyle"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateBrief), name: NSNotification.Name("updateBrief"), object: nil)
     }
     override func viewDidDisappear(_ animated: Bool) {
         order.reset()
@@ -117,7 +97,6 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func optionExpand() {
-        
         var tempPosY: CGFloat?, sugarPosY: CGFloat?, sizePosY: CGFloat?, addOnPosY: CGFloat?, saySomePosY: CGFloat?
         
         switch currentOption {
@@ -166,8 +145,12 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             self.addOnView.frame.origin.y = addOnPosY!
             self.saySomethingView.frame.origin.y = saySomePosY!
         }
+        
+        // 取消文字編輯
+        saySomethingTextView.endEditing(true)
     }
     
+    // 生成 table view
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var counts: Int?
         switch tableView {
@@ -177,25 +160,32 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             counts = Sugar.allCases.count
         case self.sizeTableView:
             counts = Size.allCases.count
+        case self.addOnTableView:
+            counts = AddOn.allCases.count
         default:
             counts = 0
         }
         return counts!
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OptionSelectCell", for: indexPath) as! OptionSelectCell
-        cell.selectionStyle = .none
+        var cell = UITableViewCell()
         
         switch tableView {
         case self.temperatureTableView:
-            cell.optionType = .temp
-            cell.option = Temp.allCases[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "OptionSelectCell", for: indexPath) as! OptionSelectCell
+            (cell as! OptionSelectCell).optionType = .temp
+            (cell as! OptionSelectCell).option = Temp.allCases[indexPath.row]
         case self.sugarTableView:
-            cell.optionType = .sugar
-            cell.option = Sugar.allCases[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "OptionSelectCell", for: indexPath) as! OptionSelectCell
+            (cell as! OptionSelectCell).optionType = .sugar
+            (cell as! OptionSelectCell).option = Sugar.allCases[indexPath.row]
         case self.sizeTableView:
-            cell.optionType = .size
-            cell.option = Size.allCases[indexPath.row]
+            cell = tableView.dequeueReusableCell(withIdentifier: "OptionSelectCell", for: indexPath) as! OptionSelectCell
+            (cell as! OptionSelectCell).optionType = .size
+            (cell as! OptionSelectCell).option = Size.allCases[indexPath.row]
+        case self.addOnTableView:
+            cell = tableView.dequeueReusableCell(withIdentifier: "OptionCheckCell", for: indexPath) as! OptionCheckCell
+            (cell as! OptionCheckCell).option = AddOn.allCases[indexPath.row]
         default:
             break
         }
@@ -219,6 +209,65 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         })
     }
     
+    // 更新 brief 與 確認是否可購買
+    @objc func updateBrief() {
+        var outputStr: String = ""
+        var totalPrice: Int = 0
+        var isCanOrder: Bool = false
+        if let priceM = selectedDrink?.priceM.value {
+            totalPrice = Int(priceM)!
+        }
+        
+        if let temp = order.drinkTemp {
+            let str = temp.rawValue.components(separatedBy: " ")[0]
+            outputStr += "\(str)、"
+        }
+        if let sugar = order.drinkSugar {
+            let str = sugar.rawValue.components(separatedBy: " ")[0]
+            outputStr += "\(str)、"
+        }
+        if let size = order.drinkSize {
+            let str = size.rawValue.components(separatedBy: " ")[0]
+            outputStr += "\(str)"
+            // 中杯、大杯價格
+            if size == .medium,
+               let priceM = selectedDrink?.priceM.value {
+                totalPrice = Int(priceM)!
+            } else if size == .large,
+              let priceL = selectedDrink?.priceL.value {
+                totalPrice = Int(priceL)!
+            }
+        }
+        for ingredient in order.addOn {
+            let str = ingredient.rawValue.components(separatedBy: " ")[0].prefix(2)
+            outputStr += "、加\(str)"
+            // 加白玉墨玉加錢
+            if ingredient == .whiteBubble {
+                totalPrice += 5
+            } else if ingredient == .blackBubble {
+                totalPrice += 10
+            }
+        }
+        
+        // 檢查是否訂購
+        if let _ = order.drinkTemp, let _ = order.drinkSugar, let _ = order.drinkSize {
+            isCanOrder = true
+        }
+        
+        briefLabel.text = outputStr
+        priceLabel.text = "$\(totalPrice).00"
+        setOrderBtnEnabled(isCanOrder)
+    }
+    
+    func setOrderBtnEnabled(_ isEnabled: Bool) {
+        if isEnabled {
+            orderBtn.isEnabled = true
+            orderBtn.backgroundColor = UIColor(named: "LightYellowColor")
+        } else {
+            orderBtn.isEnabled = false
+            orderBtn.backgroundColor = UIColor(red: 192/255, green: 192/255, blue: 192/255, alpha: 1)
+        }
+    }
     
     // 設定當前 option view
     @IBAction func setMode(_ sender: UIButton) {

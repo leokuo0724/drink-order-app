@@ -17,20 +17,22 @@ class OptionSelectCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        btn.frame = CGRect(x: 36, y: 0, width: 48, height: 48)
-        btn.tintColor = .white
-        btn.setImage(UIImage(systemName: "circle"), for: .normal)
-        btn.setTitle("", for: .normal)
-        btn.isEnabled = true
-        btn.addTarget(self, action: #selector(selectOption), for: .touchUpInside)
-        self.addSubview(btn)
+        self.selectionStyle = .none
         
         label.frame = CGRect(x: 80, y: 0, width: UIScreen.main.bounds.width-80-36, height: 48)
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 17)
         label.text = "test"
         self.addSubview(label)
+        
+        btn.frame = CGRect(x: 48, y: 0, width: UIScreen.main.bounds.width-48, height: 48)
+        btn.contentHorizontalAlignment = .leading
+        btn.tintColor = .white
+        btn.setImage(UIImage(systemName: "circle"), for: .normal)
+        btn.setTitle("", for: .normal)
+        btn.isEnabled = true
+        btn.addTarget(self, action: #selector(selectOption), for: .touchUpInside)
+        self.addSubview(btn)
     }
     
     @objc func selectOption() {
@@ -51,9 +53,7 @@ class OptionSelectCell: UITableViewCell {
             }
         }
         setBtnStyle(isActive: true)
-        print(order.drinkTemp)
-        print(order.drinkSugar)
-        print(order.drinkSize)
+        NotificationCenter.default.post(name: NSNotification.Name("updateBrief"), object: nil)
     }
     
     func setBtnStyle(isActive: Bool) {

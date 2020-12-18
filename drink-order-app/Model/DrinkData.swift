@@ -49,21 +49,3 @@ struct StringType: Codable {
         case value = "$t"
     }
 }
-//struct URLType: Codable {
-//    let value: URL?
-//    enum CodingKeys: String, CodingKey {
-//        case value = "$t"
-//    }
-//}
-//struct IntType: Codable {
-//    let value: Int
-//    enum CodingKeys: String, CodingKey {
-//        case value = "$t"
-//    }
-//}
-//struct BoolType: Codable {
-//    let value: Bool
-//    enum CodingKeys: String, CodingKey {
-//        case value = "$t"
-//    }
-//}

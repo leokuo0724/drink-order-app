@@ -16,9 +16,12 @@
 		EB139E2A258760DE003F05A8 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB139E29258760DE003F05A8 /* BaseCollectionViewCell.swift */; };
 		EB139E2D2587611D003F05A8 /* CoverFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB139E2C2587611D003F05A8 /* CoverFlowLayout.swift */; };
 		EB24223F258BB62A001F6F28 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB24223E258BB62A001F6F28 /* Order.swift */; };
+		EB242247258C45A1001F6F28 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB242246258C45A1001F6F28 /* Enums.swift */; };
+		EB24224B258C465D001F6F28 /* OptionCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB24224A258C465D001F6F28 /* OptionCheckCell.swift */; };
 		EB664F1C2588EAF7002BBDC8 /* DrinkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */; };
 		EB664F1F2589103D002BBDC8 /* DrinkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */; };
 		EB664F22258A36F2002BBDC8 /* OptionSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */; };
+		EB85DB5D258C54B700730003 /* SaySometingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB85DB5C258C54B700730003 /* SaySometingTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +36,12 @@
 		EB139E29258760DE003F05A8 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB139E2C2587611D003F05A8 /* CoverFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverFlowLayout.swift; sourceTree = "<group>"; };
 		EB24223E258BB62A001F6F28 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		EB242246258C45A1001F6F28 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
+		EB24224A258C465D001F6F28 /* OptionCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCheckCell.swift; sourceTree = "<group>"; };
 		EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkData.swift; sourceTree = "<group>"; };
 		EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailViewController.swift; sourceTree = "<group>"; };
 		EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectCell.swift; sourceTree = "<group>"; };
+		EB85DB5C258C54B700730003 /* SaySometingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaySometingTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,21 +74,48 @@
 		EB139E0C2587589E003F05A8 /* drink-order-app */ = {
 			isa = PBXGroup;
 			children = (
+				EB242243258C44BE001F6F28 /* View Controllers */,
+				EB242244258C44DE001F6F28 /* Views */,
+				EB242242258C4499001F6F28 /* Model */,
 				EB139E0D2587589E003F05A8 /* AppDelegate.swift */,
 				EB139E0F2587589E003F05A8 /* SceneDelegate.swift */,
 				EB139E132587589E003F05A8 /* Main.storyboard */,
-				EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */,
-				EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */,
-				EB139E29258760DE003F05A8 /* BaseCollectionViewCell.swift */,
-				EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */,
-				EB139E262587604C003F05A8 /* HomeViewController.swift */,
-				EB24223E258BB62A001F6F28 /* Order.swift */,
 				EB139E2C2587611D003F05A8 /* CoverFlowLayout.swift */,
 				EB139E16258758A1003F05A8 /* Assets.xcassets */,
 				EB139E18258758A1003F05A8 /* LaunchScreen.storyboard */,
 				EB139E1B258758A1003F05A8 /* Info.plist */,
 			);
 			path = "drink-order-app";
+			sourceTree = "<group>";
+		};
+		EB242242258C4499001F6F28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */,
+				EB24223E258BB62A001F6F28 /* Order.swift */,
+				EB242246258C45A1001F6F28 /* Enums.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EB242243258C44BE001F6F28 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB139E262587604C003F05A8 /* HomeViewController.swift */,
+				EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		EB242244258C44DE001F6F28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB139E29258760DE003F05A8 /* BaseCollectionViewCell.swift */,
+				EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */,
+				EB24224A258C465D001F6F28 /* OptionCheckCell.swift */,
+				EB85DB5C258C54B700730003 /* SaySometingTextView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +190,8 @@
 			files = (
 				EB139E2A258760DE003F05A8 /* BaseCollectionViewCell.swift in Sources */,
 				EB139E2D2587611D003F05A8 /* CoverFlowLayout.swift in Sources */,
+				EB242247258C45A1001F6F28 /* Enums.swift in Sources */,
+				EB85DB5D258C54B700730003 /* SaySometingTextView.swift in Sources */,
 				EB664F22258A36F2002BBDC8 /* OptionSelectCell.swift in Sources */,
 				EB24223F258BB62A001F6F28 /* Order.swift in Sources */,
 				EB664F1C2588EAF7002BBDC8 /* DrinkData.swift in Sources */,
@@ -164,6 +199,7 @@
 				EB139E272587604C003F05A8 /* HomeViewController.swift in Sources */,
 				EB664F1F2589103D002BBDC8 /* DrinkDetailViewController.swift in Sources */,
 				EB139E102587589E003F05A8 /* SceneDelegate.swift in Sources */,
+				EB24224B258C465D001F6F28 /* OptionCheckCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
