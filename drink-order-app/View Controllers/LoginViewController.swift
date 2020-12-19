@@ -9,6 +9,15 @@ import UIKit
 
 var userInfo = UserInfo(userName: "", userGroup: "", editCode: "")
 
+extension UIViewController {
+    func presentLoading() {
+        let controller = LoadingViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.modalTransitionStyle = .crossDissolve
+        present(controller, animated: true, completion: nil)
+    }
+}
+
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var groups: Array<String> = []
@@ -39,6 +48,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(hideGroupSelection), name: NSNotification.Name("hideGroupSelection"), object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.presentLoading()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

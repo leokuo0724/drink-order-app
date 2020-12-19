@@ -22,6 +22,7 @@
 		EB24223F258BB62A001F6F28 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB24223E258BB62A001F6F28 /* Order.swift */; };
 		EB242247258C45A1001F6F28 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB242246258C45A1001F6F28 /* Enums.swift */; };
 		EB24224B258C465D001F6F28 /* OptionCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB24224A258C465D001F6F28 /* OptionCheckCell.swift */; };
+		EB48790B258E67A400C152A0 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB48790A258E67A400C152A0 /* LoadingViewController.swift */; };
 		EB664F1C2588EAF7002BBDC8 /* DrinkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */; };
 		EB664F1F2589103D002BBDC8 /* DrinkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */; };
 		EB664F22258A36F2002BBDC8 /* OptionSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */; };
@@ -50,6 +51,7 @@
 		EB24223E258BB62A001F6F28 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		EB242246258C45A1001F6F28 /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		EB24224A258C465D001F6F28 /* OptionCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCheckCell.swift; sourceTree = "<group>"; };
+		EB48790A258E67A400C152A0 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		EB664F1B2588EAF7002BBDC8 /* DrinkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkData.swift; sourceTree = "<group>"; };
 		EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkDetailViewController.swift; sourceTree = "<group>"; };
 		EB664F21258A36F2002BBDC8 /* OptionSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectCell.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				EB135974258DE9CB004BB96C /* LoginViewController.swift */,
 				EB85DB60258C8E4300730003 /* OrderListViewController.swift */,
 				EB13597E258E358F004BB96C /* GroupViewController.swift */,
+				EB48790A258E67A400C152A0 /* LoadingViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				EB135978258E217B004BB96C /* LoginTextField.swift in Sources */,
 				EB85DB6C258C9B8800730003 /* OrderItemCell.swift in Sources */,
 				EB139E272587604C003F05A8 /* HomeViewController.swift in Sources */,
+				EB48790B258E67A400C152A0 /* LoadingViewController.swift in Sources */,
 				EB664F1F2589103D002BBDC8 /* DrinkDetailViewController.swift in Sources */,
 				EB139E102587589E003F05A8 /* SceneDelegate.swift in Sources */,
 				EB135975258DE9CB004BB96C /* LoginViewController.swift in Sources */,
