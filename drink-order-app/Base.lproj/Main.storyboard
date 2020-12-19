@@ -585,7 +585,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dVY-JQ-Kgt">
-                                <rect key="frame" x="0.0" y="327" width="414" height="584"/>
+                                <rect key="frame" x="0.0" y="327" width="414" height="571"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwu-4B-tbg">
@@ -647,6 +647,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="questionmark.circle" catalog="system"/>
+                                        <connections>
+                                            <action selector="editCodeHintAction:" destination="k7a-2H-a1I" eventType="touchUpInside" id="bU5-hh-fVH"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqa-9d-NQl">
                                         <rect key="frame" x="42" y="217" width="330" height="34"/>
@@ -655,6 +658,30 @@
                                         <color key="textColor" name="LightYellowColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P99-ym-gY7">
+                                        <rect key="frame" x="28" y="570" width="358" height="61"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="exclamationmark.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wBh-Dk-4mB">
+                                                <rect key="frame" x="22" y="17.5" width="28" height="27"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" name="DeepBlueColor"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMz-dQ-b1q">
+                                                <rect key="frame" x="62" y="20" width="288" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" name="DeepBlueColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="14"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" name="DeepBlueColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -668,6 +695,9 @@
                         <color key="backgroundColor" name="LightYellowColor"/>
                     </view>
                     <connections>
+                        <outlet property="bottomSheetIcon" destination="wBh-Dk-4mB" id="Jyf-4f-zFm"/>
+                        <outlet property="bottomSheetLabel" destination="gMz-dQ-b1q" id="fMi-bK-Ycv"/>
+                        <outlet property="bottomSheetView" destination="P99-ym-gY7" id="c9D-GW-GFr"/>
                         <outlet property="editCodeTextField" destination="I8E-XM-GbX" id="WrO-WM-99T"/>
                         <outlet property="groupLabel" destination="gqa-9d-NQl" id="D1W-jG-Uui"/>
                         <outlet property="groupSelectionOverlayView" destination="RMk-N2-Z3O" id="Q4j-xP-QOJ"/>
@@ -838,6 +868,7 @@
         <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="cart" catalog="system" width="128" height="102"/>
         <image name="doc.plaintext.fill" catalog="system" width="115" height="128"/>
+        <image name="exclamationmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="kebuke-logo" width="1096" height="333"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>

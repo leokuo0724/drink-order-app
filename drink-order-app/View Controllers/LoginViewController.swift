@@ -13,12 +13,19 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var groups: Array<String> = []
     
+    enum HintType {
+        case info, danger
+    }
+    
     @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var userNameTextField: LoginTextField!
     @IBOutlet weak var editCodeTextField: LoginTextField!
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var groupTableView: UITableView!
     @IBOutlet weak var groupSelectionOverlayView: UIView!
+    @IBOutlet weak var bottomSheetView: UIView!
+    @IBOutlet weak var bottomSheetIcon: UIImageView!
+    @IBOutlet weak var bottomSheetLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,6 +182,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
               !isBlank(editCodeTextField.text!),
               editCodeTextField.text?.count == 4,
               !isBlank(groupLabel.text!) else {
+            showHintSheet(type: .danger, message: "登入資料錯誤或尚未填寫")
             return
         }
         userInfo.userName = userNameTextField.text!
@@ -182,6 +190,34 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if let controller = storyboard?.instantiateViewController(identifier: "HomeViewController") as? HomeViewController {
             controller.modalPresentationStyle = .fullScreen
             present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    // edit code hint btn
+    @IBAction func editCodeHintAction(_ sender: Any) {
+        showHintSheet(type: .info, message: "當對訂購資料刪除時需要提供驗證碼")
+    }
+    
+    func showHintSheet(type: HintType, message: String) {
+        switch type {
+        case .info:
+            bottomSheetIcon.image = UIImage(systemName: "info.circle")
+            bottomSheetIcon.tintColor = UIColor(named: "DeepBlueColor")
+            bottomSheetLabel.textColor = UIColor(named: "DeepBlueColor")
+        case .danger:
+            bottomSheetIcon.image = UIImage(systemName: "exclamationmark.circle.fill")
+            bottomSheetIcon.tintColor = UIColor(named: "RedColor")
+            bottomSheetLabel.textColor = UIColor(named: "RedColor")
+        }
+        bottomSheetLabel.text = message
+        
+        // position
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 0, options: .curveEaseOut) {
+            self.bottomSheetView.frame.origin.y -= 90
+        } completion: { (_) in
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.4, delay: 3, options: .curveEaseOut) {
+                self.bottomSheetView.frame.origin.y += 90
+            }
         }
     }
     
