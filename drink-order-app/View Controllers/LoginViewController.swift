@@ -23,6 +23,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var groupLabel: UILabel!
     @IBOutlet weak var groupTableView: UITableView!
     @IBOutlet weak var groupSelectionOverlayView: UIView!
+    @IBOutlet weak var groupSelectionView: UIView!
     @IBOutlet weak var bottomSheetView: UIView!
     @IBOutlet weak var bottomSheetIcon: UIImageView!
     @IBOutlet weak var bottomSheetLabel: UILabel!
@@ -103,11 +104,18 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func showGroupSelection() {
         fetchGroups()
         groupSelectionOverlayView.isHidden = false
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.groupSelectionView.frame.origin.y = 306
+        }
     }
     @objc func hideGroupSelection() {
-        groupSelectionOverlayView.isHidden = true
-        // update group
-        groupLabel.text = userInfo.userGroup
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0, options: .curveEaseInOut) {
+            self.groupSelectionView.frame.origin.y = 898
+        } completion: { (_) in
+            // update group
+            self.groupLabel.text = userInfo.userGroup
+            self.groupSelectionOverlayView.isHidden = true
+        }
     }
     
     @IBAction func addGroupAction(_ sender: Any) {

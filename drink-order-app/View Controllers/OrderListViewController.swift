@@ -108,6 +108,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         let controller = UIAlertController(title: "請輸入驗證碼", message: "輸入設定的驗證碼以刪除訂購資料", preferredStyle: .alert)
         controller.addTextField { (textField) in
             textField.placeholder = "請輸入驗證碼"
+            textField.keyboardType = .numberPad
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         controller.addAction(cancelAction)

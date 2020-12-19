@@ -364,6 +364,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
                     DispatchQueue.main.async {
                         self.setOrderBtnEnabled(true)
                         self.dismiss(animated: true, completion: nil)
+                        NotificationCenter.default.post(name: NSNotification.Name("showSuccessHint"), object: nil)
                     }
                     
                 } else {

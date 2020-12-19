@@ -21,6 +21,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var footerUserNameLabel: UILabel!
     @IBOutlet weak var footerGroupNameLabel: UILabel!
+    @IBOutlet weak var successHint: UILabel!
     
     var collectionView: UICollectionView!
     
@@ -30,17 +31,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         fetchItem()
         
         // 設定使用者名稱與群組名稱
-        greetingLabel.text = "Hello,\(userInfo.userName)"
+        greetingLabel.text = "Hello, \(userInfo.userName)"
         footerUserNameLabel.text = userInfo.userName
         footerGroupNameLabel.text = userInfo.userGroup
         
         // order list btn
         orderListBtn.layer.cornerRadius = 6
         orderListBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
+        // hint
+        successHint.layer.cornerRadius = 6
         
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(toDrinkDetail), name: NSNotification.Name("toDrinkDetail"), object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(showSuccessHint), name: NSNotification.Name("showSuccessHint"), object: nil)
     }
     
     // Delegate
@@ -162,5 +165,16 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         present(controller, animated: true, completion: nil)
     }
     
+    // 顯示成功加入訂單
+    @objc func showSuccessHint() {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 0.5, options: .curveEaseOut) {
+            self.successHint.frame.origin.y -= 36
+        } completion: { (_) in
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.3, delay: 2, options: .curveEaseOut) {
+                self.successHint.frame.origin.y += 36
+            }
+        }
+
+    }
 }
 
