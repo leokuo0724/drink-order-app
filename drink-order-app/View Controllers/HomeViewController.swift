@@ -9,8 +9,6 @@ import UIKit
 
 private let baseCellID = "baseCellID"
 
-var userInfo = UserInfo(userName: "彼得潘", userGroup: "17 彼得潘班", editCode: "9999")
-
 var allDrinks: Array<DrinkData> = []
 var allDrinkImages: [String : UIImage] = [:]
 var selectedDrink: DrinkData?

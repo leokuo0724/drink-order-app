@@ -8,9 +8,9 @@
 import Foundation
 
 class UserInfo {
-    let userName: String
-    let userGroup: String
-    let editCode: String
+    var userName: String
+    var userGroup: String
+    var editCode: String
     
     init(userName: String,
          userGroup: String,
