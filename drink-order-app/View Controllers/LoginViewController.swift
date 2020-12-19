@@ -87,6 +87,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         showGroupSelection()
     }
     
+    // 顯示/不顯示組別選擇
     func showGroupSelection() {
         fetchGroups()
         groupSelectionOverlayView.isHidden = false
@@ -97,4 +98,69 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         groupLabel.text = userInfo.userGroup
     }
     
+    @IBAction func addGroupAction(_ sender: Any) {
+        let controller = UIAlertController(title: "新增訂購群組", message: nil, preferredStyle: .alert)
+        controller.addTextField { (textField) in
+            textField.placeholder = "請輸入群組名稱"
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        controller.addAction(cancelAction)
+        let confirmAction = UIAlertAction(title: "新增", style: .default) { (_) in
+            // 新增至 DB
+            let text = controller.textFields![0].text!
+            guard !self.isBlank(text) else {
+                return
+            }
+            self.postGroup(name: text)
+            // 關閉視窗
+            self.hideGroupSelection()
+        }
+        controller.addAction(confirmAction)
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func postGroup(name: String) {
+        struct GroupData: Codable {
+            var data: GroupName
+        }
+        struct GroupName: Codable {
+            var group: String
+        }
+        let postData = GroupData(data: GroupName(group: name))
+        
+        let url = URL(string: "https://sheetdb.io/api/v1/5hz2yke6qinfs")
+        var urlRequest = URLRequest(url: url!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let data = try? JSONEncoder().encode(postData) {
+            urlRequest.httpBody = data
+            URLSession.shared.dataTask(with: urlRequest) { (data, reponse, error) in
+                if let data = data,
+                   let status = try? JSONDecoder().decode([String:Int].self, from: data),
+                   status["created"] == 1 {
+                    print("ok")
+                    userInfo.userGroup = name
+                    DispatchQueue.main.async {
+                        self.hideGroupSelection()
+                    }
+                } else {
+                    print("error")
+                    DispatchQueue.main.async {
+                        self.hideGroupSelection()
+                    }
+                }
+            }.resume()
+        }
+    }
+    
+    // 字串是否空白判斷
+    func isBlank(_ string: String) -> Bool {
+        for char in string {
+            if !char.isWhitespace {
+                return false
+            }
+        }
+        return true
+    }
 }
