@@ -11,7 +11,7 @@ class OrderItemCell: UITableViewCell {
     
     var isDeleteShow: Bool = false
     var positionRecorder: [String : CGFloat] = [:]
-    var editCode: String = "0000"
+    var editCode: String = ""
     var orderer: String = ""
 
     @IBOutlet weak var drinkImageView: UIImageView!

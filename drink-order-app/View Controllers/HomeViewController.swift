@@ -18,6 +18,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     @IBOutlet weak var indicator: UIView!
     @IBOutlet weak var orderListBtn: UIButton!
+    @IBOutlet weak var greetingLabel: UILabel!
+    @IBOutlet weak var footerUserNameLabel: UILabel!
+    @IBOutlet weak var footerGroupNameLabel: UILabel!
     
     var collectionView: UICollectionView!
     
@@ -25,12 +28,19 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         super.viewDidLoad()
         setUpView()
         fetchItem()
+        
+        // 設定使用者名稱與群組名稱
+        greetingLabel.text = "Hello,\(userInfo.userName)"
+        footerUserNameLabel.text = userInfo.userName
+        footerGroupNameLabel.text = userInfo.userGroup
+        
         // order list btn
         orderListBtn.layer.cornerRadius = 6
         orderListBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 12)
         
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(toDrinkDetail), name: NSNotification.Name("toDrinkDetail"), object: nil)
+        
     }
     
     // Delegate
@@ -134,9 +144,23 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     // 到訂購清單頁面
     @IBAction func toOrderList(_ sender: Any) {
         if let controller = storyboard?.instantiateViewController(identifier: "OrderListViewController") as? OrderListViewController {
-//            controller.modalPresentationStyle = .fullScreen
             present(controller, animated: true, completion: nil)
         }
     }
+    
+    // 回到登入頁面
+    @IBAction func toLogin(_ sender: Any) {
+        let controller = UIAlertController(title: "是否要離開首頁", message: "將回到登入頁面", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        controller.addAction(cancelAction)
+        let confirmAction = UIAlertAction(title: "確認", style: .default) { (_) in
+            self.dismiss(animated: true, completion: nil)
+            // user 清空
+            userInfo.reset()
+        }
+        controller.addAction(confirmAction)
+        present(controller, animated: true, completion: nil)
+    }
+    
 }
 

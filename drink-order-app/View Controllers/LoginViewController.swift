@@ -13,6 +13,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     var groups: Array<String> = []
     
+    @IBOutlet weak var imageContainer: UIView!
     @IBOutlet weak var userNameTextField: LoginTextField!
     @IBOutlet weak var editCodeTextField: LoginTextField!
     @IBOutlet weak var groupLabel: UILabel!
@@ -23,6 +24,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         setGroupLabel()
         hideGroupSelection()
+        
+        imageContainer.layer.shadowOffset = CGSize(width: 0, height: 4)
+        imageContainer.layer.shadowOpacity = 0.3
+        imageContainer.layer.shadowRadius = 4
         
         // NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(hideGroupSelection), name: NSNotification.Name("hideGroupSelection"), object: nil)
@@ -163,4 +168,21 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         return true
     }
+    
+    // 登入
+    @IBAction func LoginAction(_ sender: Any) {
+        guard !isBlank(userNameTextField.text!),
+              !isBlank(editCodeTextField.text!),
+              editCodeTextField.text?.count == 4,
+              !isBlank(groupLabel.text!) else {
+            return
+        }
+        userInfo.userName = userNameTextField.text!
+        userInfo.editCode = editCodeTextField.text!
+        if let controller = storyboard?.instantiateViewController(identifier: "HomeViewController") as? HomeViewController {
+            controller.modalPresentationStyle = .fullScreen
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
 }

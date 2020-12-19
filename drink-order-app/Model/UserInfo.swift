@@ -19,4 +19,10 @@ class UserInfo {
         self.userGroup = userGroup
         self.editCode = editCode
     }
+    
+    func reset() {
+        userName = ""
+        userGroup = ""
+        editCode = ""
+    }
 }
