@@ -11,6 +11,8 @@ class OrderItemCell: UITableViewCell {
     
     var isDeleteShow: Bool = false
     var positionRecorder: [String : CGFloat] = [:]
+    var editCode: String = "0000"
+    var orderer: String = ""
 
     @IBOutlet weak var drinkImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -108,4 +110,10 @@ class OrderItemCell: UITableViewCell {
         isDeleteShow = false
     }
     
+    
+    @IBAction func deleteAction(_ sender: Any) {
+        let editCodeDic: [String : String] = ["editCode" : self.editCode, "orderer": self.orderer]
+        // userInfo: [AnyHashable : Any]
+        NotificationCenter.default.post(name: NSNotification.Name("deleteAction"), object: nil, userInfo: editCodeDic)
+    }
 }
