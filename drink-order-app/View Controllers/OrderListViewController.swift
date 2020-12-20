@@ -72,7 +72,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
     // get google sheet 資料
     func fetchOrderItems() {
         presentLoading()
-        let url = URL(string: "https://sheetdb.io/api/v1/wbsoh89yl2tip")
+        let url = URL(string: "https://sheetdb.io/api/v1/ah6jyov47j8d0")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -142,7 +142,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func deleteOrder() {
-        let url = URL(string: "https://sheetdb.io/api/v1/wbsoh89yl2tip/orderer/\(currentCellOrderer!)?limit=1".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        let url = URL(string: "https://sheetdb.io/api/v1/ah6jyov47j8d0/orderer/\(currentCellOrderer!)?limit=1".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "DELETE"
         URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in

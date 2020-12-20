@@ -83,7 +83,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func fetchGroups() {
         presentLoading()
-        let url = URL(string: "https://sheetdb.io/api/v1/5hz2yke6qinfs")
+        let url = URL(string: "https://sheetdb.io/api/v1/yj68ak1jkr3hr")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue("applicaion/json", forHTTPHeaderField: "Content-Type")
@@ -184,7 +184,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let postData = GroupData(data: GroupName(group: name))
         
         presentLoading()
-        let url = URL(string: "https://sheetdb.io/api/v1/5hz2yke6qinfs")
+        let url = URL(string: "https://sheetdb.io/api/v1/yj68ak1jkr3hr")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -369,7 +369,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
                                   lastUpdateTime: formatDate())
         let postOrder = PostOrder(data: orderItem)
         
-        let url = URL(string: "https://sheetdb.io/api/v1/wbsoh89yl2tip")
+        let url = URL(string: "https://sheetdb.io/api/v1/ah6jyov47j8d0")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("appliction/json", forHTTPHeaderField: "Content-Type")
