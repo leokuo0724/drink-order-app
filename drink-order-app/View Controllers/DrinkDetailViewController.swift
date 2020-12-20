@@ -332,8 +332,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func postOrder() {
-        // 開始 loading anim
-        
+        presentLoading()
         // 設定資料格式
         let orderItem = OrderItem(group: userInfo.userGroup,
                                   orderer: userInfo.userName,
@@ -363,6 +362,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
                     print("ok")
                     DispatchQueue.main.async {
                         self.setOrderBtnEnabled(true)
+                        self.dismissLoading()
                         self.dismiss(animated: true, completion: nil)
                         NotificationCenter.default.post(name: NSNotification.Name("showSuccessHint"), object: nil)
                     }
@@ -370,6 +370,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
                 } else {
                     print("error")
                     DispatchQueue.main.async {
+                        self.dismissLoading()
                         self.setOrderBtnEnabled(true)
                     }
                 }

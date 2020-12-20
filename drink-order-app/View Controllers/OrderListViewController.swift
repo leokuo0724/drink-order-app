@@ -25,12 +25,14 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         orderListTableView.backgroundColor = .clear
         orderListTableView.separatorColor = UIColor(red: 255, green: 255, blue: 255, alpha: 0.5)
         orderListTableView.separatorInset = UIEdgeInsets(top: 0, left: 92, bottom: 0, right: 0)
-        fetchOrderItems()
         
         // Notification Center
         NotificationCenter.default.addObserver(self, selector: #selector(deleteAction), name: NSNotification.Name("deleteAction"), object: nil)
         NotificationCenter.default.addObserver(forName: NSNotification.Name("deleteAction"), object: nil, queue: nil, using: catchNotiInfo)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchOrderItems()
     }
     
     func catchNotiInfo(notification: Notification) {
@@ -69,6 +71,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
 
     // get google sheet 資料
     func fetchOrderItems() {
+        presentLoading()
         let url = URL(string: "https://sheetdb.io/api/v1/wbsoh89yl2tip")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "GET"
@@ -87,9 +90,13 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
                         self.orderListTableView.reloadData()
                         self.totalAmountLabel.text = "共計 \(self.targetList.count)杯"
                         self.priceLabel.text = "$\(self.computeTotal())"
+                        self.dismissLoading()
                     }
                 } catch {
                     print(error)
+                    DispatchQueue.main.async {
+                        self.dismissLoading()
+                    }
                 }
             }
         }.resume()

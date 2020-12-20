@@ -24,9 +24,10 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        modalTransitionStyle = .crossDissolve
-//                modalPresentationStyle = .overFullScreen
-
+        print("groupViewController")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         // 獲取群組資料
         fetchGroups()
     }

@@ -28,7 +28,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-        fetchItem()
         
         // 設定使用者名稱與群組名稱
         greetingLabel.text = "Hello, \(userInfo.userName)"
@@ -44,6 +43,10 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         // Notification
         NotificationCenter.default.addObserver(self, selector: #selector(toDrinkDetail), name: NSNotification.Name("toDrinkDetail"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSuccessHint), name: NSNotification.Name("showSuccessHint"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchItem()
     }
     
     // Delegate
@@ -64,6 +67,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Fetch Data
     func fetchItem() {
+        presentLoading()
         // Get data
         let urlStr = "https://spreadsheets.google.com/feeds/list/1yAyoNkOetc7JvSFQLs8LGpm2psypOi-QBMpRnWuo2sg/od6/public/values?alt=json"
         if let url = URL(string: urlStr) {
@@ -76,9 +80,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                         // 主線更新畫面
                         DispatchQueue.main.async {
                             self.collectionView.reloadData()
+                            self.dismissLoading()
                         }
                     } catch {
                         print(error)
+                        DispatchQueue.main.async {
+                            self.dismissLoading()
+                        }
                     }
                 }
                 

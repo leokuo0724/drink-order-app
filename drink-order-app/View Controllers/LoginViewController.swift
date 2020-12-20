@@ -16,6 +16,29 @@ extension UIViewController {
         controller.modalTransitionStyle = .crossDissolve
         present(controller, animated: true, completion: nil)
     }
+    func dismissLoading() {
+        let topVC = topMostViewController()
+        guard topVC is LoadingViewController else {
+            return
+        }
+        topVC.dismiss(animated: true, completion: nil)
+    }
+    // 拿到最上層 VC
+    func topMostViewController() -> UIViewController {
+        if self.presentedViewController == nil {
+            return self
+        }
+        if let navigation = self.presentedViewController as? UINavigationController {
+            return navigation.visibleViewController!.topMostViewController()
+        }
+        if let tab = self.presentedViewController as? UITabBarController {
+            if let selectedTab = tab.selectedViewController {
+                return selectedTab.topMostViewController()
+            }
+            return tab.topMostViewController()
+        }
+        return self.presentedViewController!.topMostViewController()
+    }
 }
 
 class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -50,10 +73,6 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         NotificationCenter.default.addObserver(self, selector: #selector(hideGroupSelection), name: NSNotification.Name("hideGroupSelection"), object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.presentLoading()
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groups.count
     }
@@ -65,6 +84,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func fetchGroups() {
+        presentLoading()
         let url = URL(string: "https://sheetdb.io/api/v1/5hz2yke6qinfs")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "GET"
@@ -84,9 +104,13 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     // 更新畫面
                     DispatchQueue.main.async {
                         self.groupTableView.reloadData()
+                        self.dismissLoading()
                     }
                 } catch {
                     print(error)
+                    DispatchQueue.main.async {
+                        self.dismissLoading()
+                    }
                 }
             }
         }.resume()
@@ -161,6 +185,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         let postData = GroupData(data: GroupName(group: name))
         
+        presentLoading()
         let url = URL(string: "https://sheetdb.io/api/v1/5hz2yke6qinfs")
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
@@ -175,11 +200,13 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     print("ok")
                     userInfo.userGroup = name
                     DispatchQueue.main.async {
+                        self.dismissLoading()
                         self.hideGroupSelection()
                     }
                 } else {
                     print("error")
                     DispatchQueue.main.async {
+                        self.dismissLoading()
                         self.hideGroupSelection()
                     }
                 }
