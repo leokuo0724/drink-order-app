@@ -18,6 +18,7 @@ extension UIViewController {
     }
     func dismissLoading() {
         let topVC = topMostViewController()
+        print(topVC)
         guard topVC is LoadingViewController else {
             return
         }
@@ -27,15 +28,6 @@ extension UIViewController {
     func topMostViewController() -> UIViewController {
         if self.presentedViewController == nil {
             return self
-        }
-        if let navigation = self.presentedViewController as? UINavigationController {
-            return navigation.visibleViewController!.topMostViewController()
-        }
-        if let tab = self.presentedViewController as? UITabBarController {
-            if let selectedTab = tab.selectedViewController {
-                return selectedTab.topMostViewController()
-            }
-            return tab.topMostViewController()
         }
         return self.presentedViewController!.topMostViewController()
     }
@@ -71,6 +63,12 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // NotificationCenter
         NotificationCenter.default.addObserver(self, selector: #selector(hideGroupSelection), name: NSNotification.Name("hideGroupSelection"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userNameTextField.text = ""
+        editCodeTextField.text = ""
+        groupLabel.text = ""
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

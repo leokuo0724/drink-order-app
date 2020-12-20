@@ -209,7 +209,7 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             if selectedDrink?.isCanAddBlackBubble.value == "FALSE" {
                 addOnArr = addOnArr.filter({ $0 != .blackBubble })
             }
-            (cell as! OptionCheckCell).option = AddOn.allCases[indexPath.row]
+            (cell as! OptionCheckCell).option = addOnArr[indexPath.row]
         default:
             break
         }

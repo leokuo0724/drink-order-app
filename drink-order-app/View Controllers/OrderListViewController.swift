@@ -31,7 +31,7 @@ class OrderListViewController: UIViewController, UITableViewDelegate, UITableVie
         NotificationCenter.default.addObserver(forName: NSNotification.Name("deleteAction"), object: nil, queue: nil, using: catchNotiInfo)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         fetchOrderItems()
     }
     

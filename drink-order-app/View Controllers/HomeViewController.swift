@@ -45,7 +45,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         NotificationCenter.default.addObserver(self, selector: #selector(showSuccessHint), name: NSNotification.Name("showSuccessHint"), object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         fetchItem()
     }
     
@@ -79,12 +79,14 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                         allDrinks = result.feed.entry
                         // 主線更新畫面
                         DispatchQueue.main.async {
+                            print("dismiss success")
                             self.collectionView.reloadData()
                             self.dismissLoading()
                         }
                     } catch {
                         print(error)
                         DispatchQueue.main.async {
+                            print("dismiss error")
                             self.dismissLoading()
                         }
                     }
