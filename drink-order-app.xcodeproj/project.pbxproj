@@ -10,7 +10,6 @@
 		EB135975258DE9CB004BB96C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB135974258DE9CB004BB96C /* LoginViewController.swift */; };
 		EB135978258E217B004BB96C /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB135977258E217B004BB96C /* LoginTextField.swift */; };
 		EB13597B258E2F21004BB96C /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13597A258E2F21004BB96C /* GroupCell.swift */; };
-		EB13597F258E358F004BB96C /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13597E258E358F004BB96C /* GroupViewController.swift */; };
 		EB139E0E2587589E003F05A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB139E0D2587589E003F05A8 /* AppDelegate.swift */; };
 		EB139E102587589E003F05A8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB139E0F2587589E003F05A8 /* SceneDelegate.swift */; };
 		EB139E152587589E003F05A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB139E132587589E003F05A8 /* Main.storyboard */; };
@@ -37,7 +36,6 @@
 		EB135974258DE9CB004BB96C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB135977258E217B004BB96C /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		EB13597A258E2F21004BB96C /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
-		EB13597E258E358F004BB96C /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		EB139E0A2587589E003F05A8 /* drink-order-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "drink-order-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB139E0D2587589E003F05A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB139E0F2587589E003F05A8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				EB664F1E2589103D002BBDC8 /* DrinkDetailViewController.swift */,
 				EB135974258DE9CB004BB96C /* LoginViewController.swift */,
 				EB85DB60258C8E4300730003 /* OrderListViewController.swift */,
-				EB13597E258E358F004BB96C /* GroupViewController.swift */,
 				EB48790A258E67A400C152A0 /* LoadingViewController.swift */,
 			);
 			path = "View Controllers";
@@ -219,7 +216,6 @@
 				EB139E2D2587611D003F05A8 /* CoverFlowLayout.swift in Sources */,
 				EB13597B258E2F21004BB96C /* GroupCell.swift in Sources */,
 				EB85DB61258C8E4300730003 /* OrderListViewController.swift in Sources */,
-				EB13597F258E358F004BB96C /* GroupViewController.swift in Sources */,
 				EB242247258C45A1001F6F28 /* Enums.swift in Sources */,
 				EB85DB5D258C54B700730003 /* SaySometingTextView.swift in Sources */,
 				EB664F22258A36F2002BBDC8 /* OptionSelectCell.swift in Sources */,

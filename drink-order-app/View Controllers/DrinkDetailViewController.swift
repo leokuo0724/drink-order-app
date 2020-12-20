@@ -159,11 +159,26 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
         case self.temperatureTableView:
             counts = Temp.allCases.count
         case self.sugarTableView:
-            counts = Sugar.allCases.count
+            if selectedDrink?.isSugarFixed.value == "TRUE" {
+                counts = 1
+            } else {
+                counts = Sugar.allCases.count
+            }
         case self.sizeTableView:
-            counts = Size.allCases.count
+            if selectedDrink?.priceL.value == "無資料" {
+                counts = 1
+            } else {
+                counts = Size.allCases.count
+            }
         case self.addOnTableView:
-            counts = AddOn.allCases.count
+            var count = AddOn.allCases.count
+            if selectedDrink?.isCanAddWhiteBubble.value == "FALSE" {
+                count -= 1
+            }
+            if selectedDrink?.isCanAddBlackBubble.value == "FALSE" {
+                count -= 1
+            }
+            counts = count
         default:
             counts = 0
         }
@@ -187,6 +202,13 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             (cell as! OptionSelectCell).option = Size.allCases[indexPath.row]
         case self.addOnTableView:
             cell = tableView.dequeueReusableCell(withIdentifier: "OptionCheckCell", for: indexPath) as! OptionCheckCell
+            var addOnArr = AddOn.allCases
+            if selectedDrink?.isCanAddWhiteBubble.value == "FALSE" {
+                addOnArr = addOnArr.filter({ $0 != .whiteBubble })
+            }
+            if selectedDrink?.isCanAddBlackBubble.value == "FALSE" {
+                addOnArr = addOnArr.filter({ $0 != .blackBubble })
+            }
             (cell as! OptionCheckCell).option = AddOn.allCases[indexPath.row]
         default:
             break
@@ -245,9 +267,9 @@ class DrinkDetailViewController: UIViewController, UITableViewDataSource, UITabl
             outputStr += "、加\(str)"
             // 加白玉墨玉加錢
             if ingredient == .whiteBubble {
-                totalPrice += 5
-            } else if ingredient == .blackBubble {
                 totalPrice += 10
+            } else if ingredient == .blackBubble {
+                totalPrice += 15
             }
         }
         

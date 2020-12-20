@@ -26,7 +26,7 @@ struct DrinkData: Codable {
     let maxCalorieL: StringType
     let isCanAddWhiteBubble: StringType
     let isCanAddBlackBubble: StringType
-    let isPopular: StringType
+    let isSugarFixed: StringType
     
     enum CodingKeys: String, CodingKey {
         case name_zh = "gsx$namezh"
@@ -39,7 +39,7 @@ struct DrinkData: Codable {
         case maxCalorieL = "gsx$maxcaloriel"
         case isCanAddWhiteBubble = "gsx$iscanaddwhitebubble"
         case isCanAddBlackBubble = "gsx$iscanaddblackbubble"
-        case isPopular = "gsx$ispopular"
+        case isSugarFixed = "gsx$issugarfixed"
     }
 }
 
